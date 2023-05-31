@@ -1,0 +1,197 @@
+openapi: 3.0.1
+info:
+  description: Pavitra test spec
+  description1: test test
+  description1: test test test
+  version: '1.0'
+servers:
+- url: http://orders.sock-shop
+paths:
+  "/orders":
+    post:
+      tags:
+      - orders
+      summary: "Create Orders"
+      description: "Creates an order for a customer"
+      operationId: ba3f307a-1c68-402c-a4d7-8af9fdbd5f33
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ''
+            example:
+              address:
+                city: Glasgow
+                country: United Kingdom
+                number: "246"
+                postcode: G67 3DL
+                street: Whitelees Road
+              card:
+                ccv: "958"
+                expires: "08/19"
+                longNum: "5544154011345918"
+              customer:
+                firstName: User
+                lastName: Name
+                username: user
+              customerId: 57a98d98e4b00679b4a830b2
+              date: "2022-06-19T07:42:41.828+0000"
+              items:
+                - itemId: 819e1fbf-8b7e-4f6d-811f-693534916a8b
+                  quantity: 1
+                  unitPrice: 14
+              shipment:
+                name: 57a98d98e4b00679b4a830b2
+              total: 18.99
+        required: true
+      responses:
+        '201':
+          description: Successful call with status 201
+          content:
+            application/json:
+              example:
+                address:
+                  city: Glasgow
+                  country: United Kingdom
+                  number: '246'
+                  postcode: G67 3DL
+                  street: Whitelees Road
+                card:
+                  ccv: '958'
+                  expires: '08/19'
+                  longNum: '5544154011345918'
+                customer:
+                  addresses: []
+                  cards: []
+                  firstName: User
+                  lastName: Name
+                  username: user
+                customerId: 57a98d98e4b00679b4a830b2
+                date: '2022-06-19T07:42:41.828+0000'
+                id: 62aed37161c4e9000733c011
+                items:
+                - id: 62aed37176ea610008ced921
+                  itemId: 819e1fbf-8b7e-4f6d-811f-693534916a8b
+                  quantity: 1
+                  unitPrice: 14
+                shipment:
+                  id: 5a3ea500-918a-42e1-92eb-c33824df4ddc
+                  name: 57a98d98e4b00679b4a830b2
+                total: 18.99
+        '406':
+          description: Failed call with status 406
+          content:
+            application/json:
+              example:
+                error: Not Acceptable
+                message: 'Payment declined: amount exceeds 15.00'
+                path: "/orders"
+        '500':
+          description: Failed call with status 500
+          content:
+            application/json:
+              example:
+                error: Internal Server Error
+                message: Unable to create order due to unspecified IO error.
+                path: "/orders"
+  "/orders/search/customerId":
+    get:
+      tags:
+      - orders
+      summary: "Fetch orders of a Customer"
+      description: Fetch orders of a Customer with CustomerId
+      operationId: '092766ae-1b38-4660-862f-0f998c6405b9'
+      parameters:
+      - name: sort
+        in: query
+        required: true
+        style: form
+        schema:
+          type: string
+          enum: [Date-Ascending,Date-Descending,Order Status]
+      - name: custId
+        in: query
+        required: true
+        style: form
+        schema:
+          type: string
+        example: 62b4dba5758a340001cc36af
+      responses:
+        '200':
+          description: Successful call with status 200
+          content:
+            application/json:
+              example:
+                customerOrders:
+                - address:
+                  city: Kansas
+                  country: US
+                  number: '1234'
+                  postcode: '90210'
+                  street: Kansas Main Road
+                  card:
+                    ccv: '123'
+                    expires: 12/26
+                    longNum: '41111111111111111111'
+                  customer:
+                    addresses: []
+                    cards: []
+                    firstName: Refael
+                    lastName: Watson
+                    username: Refael
+                  customerId: 62b4dba5758a340001cc36af
+                  date: '2022-06-23T21:32:01.072+0000'
+                  items:
+                  - itemId: 3395a43e-2d88-40de-b95f-e00e1502085b
+                    quantity: 1
+                    unitPrice: 18
+                  shipment:
+                    name: 62b4dba5758a340001cc36af
+                  total: 22.99
+  "/orders/{orderId}":
+    get:
+      tags:
+      - orders
+      summary: "Fetch order"
+      description: Fetch order by orderId
+      operationId: 1aa014d9-f011-4f5e-b4dc-8b073bcf9c34
+      parameters:
+      - name: orderId
+        in: path
+        required: true
+        style: simple
+        schema:
+          type: string
+        example: 62b4dbd161c4e9000737fc02
+      responses:
+        '200':
+          description: Successful call with status 200
+          content:
+            application/json:
+              example:
+                address:
+                  city: Kubernetes
+                  country: UP9
+                  number: '1234'
+                  postcode: '90210'
+                  street: API Traffic viewer
+                card:
+                  ccv: '123'
+                  expires: 12/26
+                  longNum: '41111111111111111111'
+                customer:
+                  addresses: []
+                  cards: []
+                  firstName: Refael
+                  lastName: "@ UP9"
+                  username: Refael
+                customerId: 62b4dba5758a340001cc36af
+                date: '2022-06-23T21:32:01.072+0000'
+                items:
+                - itemId: 3395a43e-2d88-40de-b95f-e00e1502085b
+                  quantity: 1
+                  unitPrice: 18
+                shipment:
+                  name: 62b4dba5758a340001cc36af
+                total: 22.99

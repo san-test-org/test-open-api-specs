@@ -1,1 +1,2 @@
-# test-open-api-specs
+# sock-shop
+Repository for sock-shop API Specifications
