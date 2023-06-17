@@ -1,8 +1,6 @@
 openapi: 3.0.1
 info:
   description: Pavitra test spec
-  description1: test test
-  description1: test test test
   version: '1.0'
 servers:
 - url: http://orders.sock-shop
