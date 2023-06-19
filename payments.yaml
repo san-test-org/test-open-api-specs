@@ -10,7 +10,7 @@ info:
 servers:
   - url: http://payment.sock-shop
 paths:
-  /paymentAuth-4:
+  /paymentAuth:
     post:
       tags:
       - payments
